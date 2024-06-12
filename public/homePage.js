@@ -104,6 +104,7 @@ favoritesWidget.addUserCallback = (data) => {
       favoritesWidget.clearTable();               
       favoritesWidget.fillTable(response.data);
       moneyManager.updateUsersList(response.data);
+      favoritesWidget.setMessage(true, "Пользователь добавлен");
     }
 
     favoritesWidget.setMessage(false, response.error);
@@ -118,6 +119,7 @@ favoritesWidget.removeUserCallback = (data) => {
       favoritesWidget.clearTable();               
       favoritesWidget.fillTable(response.data);
       moneyManager.updateUsersList(response.data);
+      favoritesWidget.setMessage(true, "Пользователь удален");
     }
 
     favoritesWidget.setMessage(false, response.error);
