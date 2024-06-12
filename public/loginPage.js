@@ -14,9 +14,9 @@ userForm.loginFormCallback = (data) => {
 
       if(response) {
         location.reload();
-      }
-        
-      throw new Error('Неверный логин или пароль');
+      } 
+      
+      userForm.setLoginErrorMessage(response.error);
     });
 }
 
@@ -32,6 +32,6 @@ userForm.registerFormCallback = (data) => {
        location.reload();
      }
        
-     throw new Error('Неверный логин или пароль');
+     userForm.setRegisterErrorMessage(response.error);
    });
 }

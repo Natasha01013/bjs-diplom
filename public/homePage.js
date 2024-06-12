@@ -12,12 +12,12 @@ logoutButton.action = () => {
  }
 
 //ПОЛУЧЕНИЕ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ                                    
-ApiConnector.current = () => {
+ApiConnector.current(response => {
       console.log(response);
       if(response) {
         ProfileWidget.showProfile(response.data);
       }
-};    //не показывает данные текущего пользователя в консоли, так должно быть????
+});    
 
 
 //ПОЛУЧЕНИЕ ТЕКУЩИХ КУРСОВ ВАЛЮТ
@@ -48,9 +48,10 @@ moneyManager.addMoneyCallback = (data) => {
 
     if(response) {
       ProfileWidget.showProfile(response.data); 
+      moneyManager.setMessage(true, "Денежные средства зачислены");
     }
       
-    moneyManager.setMessage("Ошибка");
+    moneyManager.setMessage(false, response.error);
   });
 }
 
@@ -61,9 +62,10 @@ moneyManager.conversionMoneyCallback = (data) => {
 
     if(response) {
       ProfileWidget.showProfile(response.data); 
+      moneyManager.setMessage(true, "Валюта сконвертирована");
     }
           
-    moneyManager.setMessage("Ошибка");
+    moneyManager.setMessage(false, response.error);
   });
 }
 
@@ -74,9 +76,10 @@ moneyManager.sendMoneyCallback = (data) => {
 
     if(response) {
       ProfileWidget.showProfile(response.data); 
+      moneyManager.setMessage(true, "Перевод совершен");
     }
           
-    moneyManager.setMessage("Ошибка");
+    moneyManager.setMessage(false, response.error);
   });
 }
 
@@ -103,7 +106,7 @@ favoritesWidget.addUserCallback = (data) => {
       moneyManager.updateUsersList(response.data);
     }
 
-    favoritesWidget.setMessage("Ошибка");
+    favoritesWidget.setMessage(false, response.error);
   });
 }
 
@@ -117,6 +120,6 @@ favoritesWidget.removeUserCallback = (data) => {
       moneyManager.updateUsersList(response.data);
     }
 
-    favoritesWidget.setMessage("Ошибка");
+    favoritesWidget.setMessage(false, response.error);
   });
 }
